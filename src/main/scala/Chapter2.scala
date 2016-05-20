@@ -36,15 +36,8 @@ object Chapter2 {
     loop(0)
   }
 
-  def main(args: Array[String]): Unit = {
-//    val res = fib(9)
-//    println(res)
-
-//    val res = findFirst(a, isMatch)
-
-    val a = Array(1,2,3)
-    def isOrdered(a: Int, b: Int): Boolean = a <= b
-    val res = isSorted(a, isOrdered)
-    println(res)
+  // 2.3 currying
+  def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
+    null
   }
 }
