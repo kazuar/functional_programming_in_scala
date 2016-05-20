@@ -38,6 +38,6 @@ object Chapter2 {
 
   // 2.3 currying
   def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
-    null
+    (a: A) => (b: B) => f(a, b)
   }
 }
