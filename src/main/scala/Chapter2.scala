@@ -40,4 +40,9 @@ object Chapter2 {
   def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
     (a: A) => (b: B) => f(a, b)
   }
+
+  // 2.4 uncurry
+  def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
+    (a: A, b: B) => f(a)(b)
+  }
 }
