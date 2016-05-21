@@ -40,10 +40,17 @@ object List {
 
   // 3.5
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
-    case Nil => l
+    case Nil => Nil
     case Cons(x, xs) =>
       if (f(x)) dropWhile(xs, f)
       else l
+  }
+
+  // 3.6 - return a List consisting of all but the last element of a List
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(h, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
   }
 
   def apply[A](as: A*): List[A] =

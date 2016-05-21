@@ -40,4 +40,8 @@ class ListTest extends FlatSpec with MustMatchers {
     List.dropWhile(Nil, (n: Int) => n < 4) must equal(Nil)
   }
 
+  it must "return a List consisting of all but the last element of a List" in {
+    List.init(List(1, 2, 3, 4, 5)) must equal(List(1, 2, 3, 4))
+  }
+
 }
