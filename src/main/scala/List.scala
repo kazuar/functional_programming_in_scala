@@ -25,6 +25,11 @@ object List {
     case Cons(x, xs) => xs
   }
 
+  // 3.3 setHead
+  def setHead[A](a: A, l: List[A]): List[A] = {
+    Cons(a, tail(l))
+  }
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
