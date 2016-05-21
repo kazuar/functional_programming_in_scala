@@ -29,4 +29,9 @@ class ListTest extends FlatSpec with MustMatchers {
     List.setHead(1, Nil) must equal(List(1))
   }
 
+  it must "removes the first n elements from a list" in {
+    List.drop(List(1, 2, 3), 2) must equal (List(3))
+    List.drop(Nil, 2) must equal (Nil)
+  }
+
 }

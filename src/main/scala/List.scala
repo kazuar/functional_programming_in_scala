@@ -30,6 +30,13 @@ object List {
     Cons(a, tail(l))
   }
 
+  // 3.4
+  def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
+    case (l1, 0) => l1
+    case (Nil, _) => Nil
+    case (Cons(x, xs), count) => drop(xs, count - 1)
+  }
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
