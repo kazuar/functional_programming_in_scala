@@ -22,7 +22,7 @@ object List {
   // 3.2 tail
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil
-    case Cons(x, _) => _
+    case Cons(x, xs) => xs
   }
 
   def apply[A](as: A*): List[A] =
