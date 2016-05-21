@@ -3,6 +3,4 @@
   */
 object Chapter3 {
 
-  
-
 }
