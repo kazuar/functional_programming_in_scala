@@ -34,4 +34,10 @@ class ListTest extends FlatSpec with MustMatchers {
     List.drop(Nil, 2) must equal (Nil)
   }
 
+  it must "removes elements from the List prefix as long as they match a predicate" in {
+    List.dropWhile(List(5, 6, 7), (n: Int) => n < 4) must equal(List(5, 6, 7))
+    List.dropWhile(List(1, 2, 3, 4, 5), (n: Int) => n < 4) must equal(List(4, 5))
+    List.dropWhile(Nil, (n: Int) => n < 4) must equal(Nil)
+  }
+
 }

@@ -31,10 +31,19 @@ object List {
   }
 
   // 3.4
-  def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
-    case (l1, 0) => l1
-    case (Nil, _) => Nil
-    case (Cons(x, xs), count) => drop(xs, count - 1)
+  def drop[A](l: List[A], n: Int): List[A] = l match {
+    case Nil => Nil
+    case Cons(x, xs) =>
+      if (n > 0) drop(xs, n - 1)
+      else l
+  }
+
+  // 3.5
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Nil => l
+    case Cons(x, xs) =>
+      if (f(x)) dropWhile(xs, f)
+      else l
   }
 
   def apply[A](as: A*): List[A] =
