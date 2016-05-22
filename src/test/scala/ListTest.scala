@@ -44,4 +44,9 @@ class ListTest extends FlatSpec with MustMatchers {
     List.init(List(1, 2, 3, 4, 5)) must equal(List(1, 2, 3, 4))
   }
 
+  it must "return the length of a list" in {
+    List.length(List(1, 2, 3, 4, 5)) must equal(5)
+    List.length(Nil) must equal(0)
+  }
+
 }
