@@ -49,4 +49,9 @@ class ListTest extends FlatSpec with MustMatchers {
     List.length(Nil) must equal(0)
   }
 
+  it must "fold ledft on list" in {
+    List.foldLeft(List(1, 2, 3, 4, 5), 0)((x, y) => x + y) must equal(15)
+    List.foldLeft(List(1, 2, 3, 4, 5), 1.0)(_ * _) must equal(120)
+  }
+
 }

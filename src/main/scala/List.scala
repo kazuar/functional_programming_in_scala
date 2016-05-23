@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 /**
   * Created by vidas on 5/20/16.
   */
@@ -56,6 +58,16 @@ object List {
   def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+  }
+
+  // 3.10
+  @tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => {
+      val acc = f(z, x)
+      foldLeft(xs, acc)(f)
+    }
   }
 
   def sum2(ns: List[Int]) =
