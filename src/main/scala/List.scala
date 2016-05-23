@@ -57,17 +57,21 @@ object List {
 
   def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z
-    case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    case Cons(x, xs) =>
+      f(x, foldRight(xs, z)(f))
   }
 
-  // 3.10
-  @tailrec
-  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+  // 3.13
+  def foldLeft2[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
     case Nil => z
-    case Cons(x, xs) => {
-      val acc = f(z, x)
-      foldLeft(xs, acc)(f)
-    }
+    case Cons(x, xs) =>
+      f(foldRight(xs, z)((a: A, b: B) => f(b, a)), x)
+  }
+
+  def foldRight2[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) =>
+      foldLeft(xs, f(x, z))((b: B, a: A) => f(a, b))
   }
 
   def sum2(ns: List[Int]) =
@@ -79,6 +83,44 @@ object List {
   // 3.9 - length of a list
   def length[A](as: List[A]): Int = {
     foldRight(as, 0)((x, y) => 1 + y)
+  }
+
+  // 3.10
+  @tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => {
+      foldLeft(xs, f(z, x))(f)
+    }
+  }
+
+  // 3.11
+  def sum3(ns: List[Int]) =
+    foldLeft(ns, 0)((x, y) => x + y)
+
+  def product3(ns: List[Int]) =
+    foldLeft(ns, 1.0)(_ * _)
+
+  def length2[A](as: List[A]): Int =
+    foldLeft(as, 0)((x, y) => 1 + x)
+
+  // 3.12 reverse
+  def reverse[A](as: List[A]): List[A] = {
+    foldLeft(as, List[A]())((x, y) => Cons(y, x))
+  }
+
+  def append[A](a1: List[A], a2: List[A]): List[A] = a1 match {
+    case Nil => a2
+    case Cons(h,t) => Cons(h, append(t, a2))
+  }
+
+  // 3.14
+  def append2[A](a1: List[A], a2: List[A]): List[A] =
+    foldRight(a1, a2)((x, y) => Cons(x, y))
+
+  // 3.15
+  def flat[A](as: List[List[A]]): List[A] = {
+    Nil
   }
 
   def apply[A](as: A*): List[A] =

@@ -54,4 +54,37 @@ class ListTest extends FlatSpec with MustMatchers {
     List.foldLeft(List(1, 2, 3, 4, 5), 1.0)(_ * _) must equal(120)
   }
 
+  it must "sum with foldLeft" in {
+    List.sum3(List(1, 2, 3, 4, 5)) must equal(15)
+  }
+
+  it must "product with foldLeft" in {
+    List.product3(List(1, 2, 3, 4, 5)) must equal(120)
+  }
+
+  it must "return list length with foldLeft" in {
+    List.length2(List(1, 2, 3, 4, 5)) must equal(5)
+  }
+
+  it must "reverse a list" in {
+    List.reverse(List(1, 2, 3)) must equal(List(3, 2, 1))
+  }
+
+  it must "fold left2 on list" in {
+    List.foldLeft2(List(1, 2, 3, 4, 5), 0)((x, y) => x + y) must equal(15)
+    List.foldLeft2(List(1, 2, 3, 4, 5), 1.0)(_ * _) must equal(120)
+  }
+
+  it must "fold right2 on list" in {
+    List.foldRight2(List(1, 2, 3, 4, 5), 0)((x, y) => x + y) must equal(15)
+    List.foldRight2(List(1, 2, 3, 4, 5), 1.0)(_ * _) must equal(120)
+  }
+
+  it must "append list" in {
+    List.append(List(1, 2, 3), List(4, 5)) must equal(List(1, 2, 3, 4, 5))
+  }
+
+  it must "append2 list using fold" in {
+    List.append2(List(1, 2, 3), List(4, 5)) must equal(List(1, 2, 3, 4, 5))
+  }
 }
