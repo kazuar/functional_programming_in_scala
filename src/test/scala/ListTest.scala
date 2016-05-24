@@ -91,4 +91,12 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "flatten a list of lists" in {
     List.flat(List(List(1, 2, 3), List(4, 5))) must equal(List(1, 2, 3, 4, 5))
   }
+
+  it must "add one to each item" in {
+    List.addOne(List(1, 2, 3)) must equal(List(2, 3, 4))
+  }
+
+  it must "convert Double to String" in {
+    List.toStr(List(1, 2, 3))  must equal(List("1.0", "2.0", "3.0"))
+  }
 }

@@ -123,6 +123,19 @@ object List {
     foldLeft(as, List[A]())((x, y) => List.append(x, y))
   }
 
+  // 3.16
+  def addOne(as: List[Int]): List[Int] = {
+    foldRight(as, List[Int]())((x, y) => Cons(x + 1, y))
+  }
+
+  // 3.17
+  // Write a function that turns each value in a List[Double] into a String.
+  // You can use the expression d.toString to convert some d: Double to a String.
+  def toStr(as: List[Double]): List[String] = {
+    foldRight(as, List[String]())((x, y) => Cons(x.toString, y))
+  }
+
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
