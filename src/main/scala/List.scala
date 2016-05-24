@@ -120,7 +120,7 @@ object List {
 
   // 3.15
   def flat[A](as: List[List[A]]): List[A] = {
-    Nil
+    foldLeft(as, List[A]())((x, y) => List.append(x, y))
   }
 
   def apply[A](as: A*): List[A] =

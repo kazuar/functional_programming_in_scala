@@ -87,4 +87,8 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "append2 list using fold" in {
     List.append2(List(1, 2, 3), List(4, 5)) must equal(List(1, 2, 3, 4, 5))
   }
+
+  it must "flatten a list of lists" in {
+    List.flat(List(List(1, 2, 3), List(4, 5))) must equal(List(1, 2, 3, 4, 5))
+  }
 }
