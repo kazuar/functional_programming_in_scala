@@ -135,6 +135,25 @@ object List {
     foldRight(as, List[String]())((x, y) => Cons(x.toString, y))
   }
 
+  // 3.18 map
+  def map[A,B](as: List[A])(f: A => B): List[B] = {
+    foldRight(as, List[B]())((x, y) => Cons(f(x), y))
+  }
+
+  // 3.19 filter
+//  def filter[A](as: List[A])(f: A => Boolean): List[A] = {
+//    foldRight(as, List[A]())((x, y) => if (f(x)) Cons(x, y))
+//  }
+
+  def filter[A](as: List[A], f: A => Boolean): List[A] = as match {
+    case Nil => Nil
+    case Cons(x, xs) =>
+      if (f(x)) Cons(x, filter(xs, f))
+      else filter(xs, f)
+  }
+
+  def filterOddNumbers(as: List[Int]): List[Int] =
+    filter(as, (x: Int) => x % 2 != 0)
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

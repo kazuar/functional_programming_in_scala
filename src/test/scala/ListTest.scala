@@ -99,4 +99,8 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "convert Double to String" in {
     List.toStr(List(1, 2, 3))  must equal(List("1.0", "2.0", "3.0"))
   }
+
+  it must "filter odd numbers" in {
+    List.filterOddNumbers(List(1, 2, 3, 4, 5)) must equal(List(1, 3, 5))
+  }
 }
