@@ -141,10 +141,6 @@ object List {
   }
 
   // 3.19 filter
-//  def filter[A](as: List[A])(f: A => Boolean): List[A] = {
-//    foldRight(as, List[A]())((x, y) => if (f(x)) Cons(x, y))
-//  }
-
   def filter[A](as: List[A], f: A => Boolean): List[A] = as match {
     case Nil => Nil
     case Cons(x, xs) =>
@@ -154,6 +150,11 @@ object List {
 
   def filterOddNumbers(as: List[Int]): List[Int] =
     filter(as, (x: Int) => x % 2 != 0)
+
+  // 3.20 flatmap
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = {
+    foldRight(as, List[B]())((x, y) => List.append(f(x), y))
+  }
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
