@@ -156,6 +156,12 @@ object List {
     foldRight(as, List[B]())((x, y) => List.append(f(x), y))
   }
 
+  // 3.21 filter using flatmap
+  def filter2[A](as: List[A], f: A => Boolean): List[A] = {
+//    flatMap(as)(i => List(i,i))
+    Nil
+  }
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
