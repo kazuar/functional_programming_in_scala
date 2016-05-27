@@ -158,9 +158,11 @@ object List {
 
   // 3.21 filter using flatmap
   def filter2[A](as: List[A], f: A => Boolean): List[A] = {
-//    flatMap(as)(i => List(i,i))
-    Nil
+    flatMap(as)(i => if (f(i)) List(i) else Nil)
   }
+
+  def filterOddNumbers2(as: List[Int]): List[Int] =
+    filter2(as, (x: Int) => x % 2 != 0)
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

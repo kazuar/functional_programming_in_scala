@@ -107,4 +107,8 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "flatmap" in {
     List.flatMap(List(1,2,3))(i => List(i,i)) must equal(List(1, 1, 2, 2, 3, 3))
   }
+
+  it must "filter odd numbers 2" in {
+    List.filterOddNumbers2(List(1, 2, 3, 4, 5)) must equal(List(1, 3, 5))
+  }
 }
