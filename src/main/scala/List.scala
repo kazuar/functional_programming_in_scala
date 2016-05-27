@@ -153,7 +153,7 @@ object List {
 
   // 3.20 flatmap
   def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = {
-    foldRight(as, List[B]())((x, y) => List.append(f(x), y))
+    flat(map(as)(f))
   }
 
   // 3.21 filter using flatmap
