@@ -164,9 +164,15 @@ object List {
   def filterOddNumbers2(as: List[Int]): List[Int] =
     filter2(as, (x: Int) => x % 2 != 0)
 
+  // 3.22
   def zipInts(as1: List[Int], as2: List[Int]): List[Int] = (as1, as2) match {
     case (Nil, Nil) => Nil
     case (Cons(x, xs), Cons(y, ys)) => Cons(x + y, zipInts(xs, ys))
+  }
+
+  def zipWith[A](as1: List[A], as2: List[A])(f: (A, A) => A): List[A] = (as1, as2) match {
+    case (Nil, Nil) => Nil
+    case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
   }
 
   def apply[A](as: A*): List[A] =

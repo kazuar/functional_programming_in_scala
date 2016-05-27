@@ -115,4 +115,10 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "zip ints" in {
     List.zipInts(List(1, 2), List(3, 4)) must equal(List(4, 6))
   }
+
+  it must "zipWith" in {
+    List.zipWith(List(1, 2), List(3, 4))((x, y) => x + y) must equal(List(4, 6))
+    List.zipWith(List(1, 2), List(3, 4))((x, y) => x * y) must equal(List(3, 8))
+    List.zipWith(List("a", "b"), List("c", "d"))((x, y) => x + y) must equal(List("ac", "bd"))
+  }
 }
