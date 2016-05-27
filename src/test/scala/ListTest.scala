@@ -111,4 +111,8 @@ class ListTest extends FlatSpec with MustMatchers {
   it must "filter odd numbers 2" in {
     List.filterOddNumbers2(List(1, 2, 3, 4, 5)) must equal(List(1, 3, 5))
   }
+
+  it must "zip ints" in {
+    List.zipInts(List(1, 2), List(3, 4)) must equal(List(4, 6))
+  }
 }
