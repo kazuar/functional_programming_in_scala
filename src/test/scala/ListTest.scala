@@ -121,4 +121,16 @@ class ListTest extends FlatSpec with MustMatchers {
     List.zipWith(List(1, 2), List(3, 4))((x, y) => x * y) must equal(List(3, 8))
     List.zipWith(List("a", "b"), List("c", "d"))((x, y) => x + y) must equal(List("ac", "bd"))
   }
+
+  it must "hasSubsequence" in {
+    List.hasSubsequence(List(1, 2), List(1, 2)) must equal(true)
+    List.hasSubsequence(List(1), List(1, 2)) must equal(false)
+    List.hasSubsequence(Nil, List(1, 2)) must equal(false)
+    List.hasSubsequence(List(1, 2, 3, 4), List(1)) must equal(true)
+    List.hasSubsequence(List(1, 2, 3, 4), List(1, 2)) must equal(true)
+    List.hasSubsequence(List(1, 2, 3, 4), List(3, 4)) must equal(true)
+    List.hasSubsequence(List(1, 2, 3, 4), List(4)) must equal(true)
+    List.hasSubsequence(List(1, 2, 3, 4), List(5)) must equal(false)
+    List.hasSubsequence(List(1, 2, 3, 4), List(1, 3)) must equal(false)
+  }
 }

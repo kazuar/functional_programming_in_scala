@@ -170,9 +170,45 @@ object List {
     case (Cons(x, xs), Cons(y, ys)) => Cons(x + y, zipInts(xs, ys))
   }
 
+  // 3.23
   def zipWith[A](as1: List[A], as2: List[A])(f: (A, A) => A): List[A] = (as1, as2) match {
     case (Nil, Nil) => Nil
     case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
+  }
+
+  // 3.24
+  // 1
+  // 1, 2
+  // 1, 2, 3
+  // 1, 2, 3, 4
+  // 2
+  // 2, 3
+  // 2, 3, 4
+  // 3
+  // 3, 4
+  // 4
+
+  def head[A](as: List[A]): List[A] = as match {
+    case Nil => Nil
+    case Cons(x, xs) => Cons(x, Nil)
+  }
+
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = sup match {
+    case `sub` => true
+    case Nil => false
+    case Cons(x, xs) => {
+      def checkSublist(head: List[A], tail: List[A]): Boolean = {
+        if (head == sub) true
+        else if (tail == Nil) false
+        else {
+          val xsHead = List.head(tail)
+          val xsTail = List.tail(tail)
+          val newHead = List.append(head, xsHead)
+          checkSublist(newHead, xsTail)
+        }
+      }
+      if (checkSublist(Cons(x, Nil), xs)) true else hasSubsequence(xs, sub)
+    }
   }
 
   def apply[A](as: A*): List[A] =
