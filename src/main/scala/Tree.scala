@@ -11,7 +11,13 @@ object Tree {
   // 3.25
   def size[A](tree: Tree[A]): Int = tree match {
     case Leaf(v) => 1
-    case Branch(left, right) => 1+ size(left) + size(right)
+    case Branch(left, right) => 1 + size(left) + size(right)
+  }
+
+  // 3.26
+  def maximum(tree: Tree[Int]): Int = tree match {
+    case Leaf(v) => v
+    case Branch(left, right) => maximum(left) max maximum(right)
   }
 }
 
