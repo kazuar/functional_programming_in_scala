@@ -31,5 +31,24 @@ object Tree {
     case Leaf(v) => Leaf(f(v))
     case Branch(left, right) => Branch(map(left)(f), map(right)(f))
   }
+
+  // 3.29
+  def fold[A,B](tree: Tree[A])(z: A => B)(f: (B,B) => B): B = tree match {
+    case Leaf(v) => z(v)
+    case Branch(left, right) => f(fold(left)(z)(f), fold(right)(z)(f))
+  }
+
+  def size2[A](tree: Tree[A]): Int =
+    fold(tree)((i: A) => 1)((x, y) => 1 + x + y)
+
+  def maximum2(tree: Tree[Int]): Int =
+    fold(tree)((i: Int) => i)((x, y) => x max y)
+
+  def depth2[A](tree: Tree[A]): Int =
+    fold(tree)((i: A) => 1)((x, y) => (1 + x) max (1 + y))
+
+  def map2[A,B](tree: Tree[A])(f: A => B): Tree[B] = {
+    fold(tree)((i: A) => Leaf(f(i)): Tree[B] )( (x, y) => Branch(x, y) )
+  }
 }
 
