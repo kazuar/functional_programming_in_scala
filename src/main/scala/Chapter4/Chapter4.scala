@@ -18,11 +18,8 @@ object Chapter4 {
     catch { case e: Exception => None }
 
   // 4.3
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = (a, b) match {
-    case (_, None) => None
-    case (None, _) => None
-    case (Some(x), Some(y)) => Some(f(x, y))
-  }
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    a flatMap (aa => b map (bb => f(aa, bb)))
 
   // 4.4
   def sequence[A](a: List[Option[A]]): Option[List[A]] = {
