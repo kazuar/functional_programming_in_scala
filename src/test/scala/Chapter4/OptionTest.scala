@@ -50,4 +50,9 @@ class OptionTest extends FlatSpec with MustMatchers {
     sequence(List(Some(1), Some(2), Some(3), Some(4))) must equal(Some(List(1, 2, 3, 4)))
     sequence(List(Some(1), None, Some(3), Some(4))) must equal(None)
   }
+
+  it must "traverse" in {
+    traverse(List("1", "2", "3", "4"))(i => Try (i.toInt)) must equal(Some(List(1, 2, 3, 4)))
+    traverse(List("1", "A", "3", "4"))(i => Try (i.toInt)) must equal(None)
+  }
 }
