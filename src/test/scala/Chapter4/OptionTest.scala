@@ -45,4 +45,9 @@ class OptionTest extends FlatSpec with MustMatchers {
 
     testMap2("1", "2") must equal(Some(1.1))
   }
+
+  it must "sequence" in {
+    sequence(List(Some(1), Some(2), Some(3), Some(4))) must equal(Some(List(1, 2, 3, 4)))
+    sequence(List(Some(1), None, Some(3), Some(4))) must equal(None)
+  }
 }
